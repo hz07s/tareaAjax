@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Seleccionar Regiones</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <h1 class="re">Selecciona Regiones</h1>
+            </div>
+    
+            <div class="list">
+                <label for="regions">Regiones</label>
+                <select id="regions"></select>
+            </div>
+
+            <div class="add_button">
+                <button onclick="agregarRegion()">Agregar</button>
+            </div>
+
+            <label class="re"> Regiones seleccionadas:</label>
+            
+            <div id="divs_reg">
+                <div class="regions_s" id="regions_s">
+                
+                </div>
+            </div>
+    
+            <div class="canv">
+            <canvas id="confirmed"></canvas>
+            </div>
+    
+            <script src="problema1.js"></script>
+        </div>
+    </body>
+
+</html>
