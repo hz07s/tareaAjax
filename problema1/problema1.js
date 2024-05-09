@@ -70,3 +70,58 @@ function agregarRegion() {
         generarGrafica(regions_sel);
     }
 }
+
+function generarGrafica(regions_selx) {
+    subgrupo = 'confirmed';
+
+    fetch('../src/data.json')
+    .then(response => response.json())
+    .then(data => {
+        let datasets = [];
+
+        regions_selx.forEach(region => {
+            let regionData = data.find(entry => entry.region === region);
+            if (!regionData) {
+                console.error(`No hay datos disponibles para la región ${region}.`);
+                return;
+            }
+
+            let regionValues = regionData[subgrupo].map(entry => parseInt(entry.value));
+            datasets.push({
+                label: region,
+                data: regionValues,
+                borderColor: getRandomColor(),
+                backgroundColor: getRandomColor(0.1),
+                borderWidth: 1
+            });
+        });
+
+        let dates = data[0][subgrupo].map(entry => entry.date);
+
+        let ctx = document.getElementById(subgrupo).getContext('2d');
+        if (window.myChart) {
+            window.myChart.destroy();
+        }
+        window.myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: datasets
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `Gráfico de ${subgrupo}`
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => console.error('Error loading data:', error));
+}
