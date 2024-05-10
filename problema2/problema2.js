@@ -47,3 +47,7 @@ function generarGrafica() {
     })
     .catch(error => console.error('Error loading data:', error));
 }
+
+function getRandomColor(alpha = 1) {
+    return `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${alpha})`;
+}
