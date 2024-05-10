@@ -20,5 +20,30 @@ function generarGrafica() {
 
         let dates = data[0][subgrupo].map(entry => entry.date);
 
-        
+        let ctx = document.getElementById(subgrupo).getContext('2d');
+        if (window.myChart) {
+            window.myChart.destroy();
+        }
+        window.myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: datasets
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `Gráfico de ${subgrupo}`
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => console.error('Error loading data:', error));
 }
